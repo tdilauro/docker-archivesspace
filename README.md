@@ -3,6 +3,15 @@ Docker ArchivesSpace
 
 Run ArchivesSpace in Docker.
 
+**Update images**
+
+To update images from the Docker registry:
+
+```
+docker pull mysql
+docker pull markcooper/archivesspace
+```
+
 **Running**
 
 ```
