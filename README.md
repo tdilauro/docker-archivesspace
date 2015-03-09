@@ -55,4 +55,10 @@ docker run --name build -i -t \
   markcooper/archivesspace
 ```
 
+**Local build**
+
+```
+docker build -t archivesspace:latest .
+```
+
 ---
