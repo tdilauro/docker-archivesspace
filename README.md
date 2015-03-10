@@ -3,6 +3,12 @@ Docker ArchivesSpace
 
 Run ArchivesSpace in Docker.
 
+**Quickstart**
+
+```
+./run.sh
+```
+
 **Update images**
 
 To update images from the Docker registry:
@@ -16,7 +22,7 @@ docker pull markcooper/archivesspace
 
 ```
 # background mode
-docker run --name build -d \
+docker run --name archivesspace -d \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -24,7 +30,7 @@ docker run --name build -d \
   markcooper/archivesspace
 
 # foreground mode
-docker run --name build -i -t \
+docker run --name archivesspace -i -t \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -32,7 +38,7 @@ docker run --name build -i -t \
   markcooper/archivesspace
 
 # foreground mode and access container
-docker run --name build -i -t \
+docker run --name archivesspace -i -t \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -54,7 +60,7 @@ docker run -d \
   mysql
 
 # foreground mode
-docker run --name build -i -t \
+docker run --name archivesspace -i -t \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
