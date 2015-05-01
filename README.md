@@ -80,13 +80,14 @@ docker run --name archivesspace -d \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
+  -e ARCHIVESSPACE_DB_TYPE=mysql \
   -e ARCHIVESSPACE_DB_HOST_TYPE=external \
   -v $(pwd)/config:/archivesspace/config \
   -v $(pwd)/plugins:/archivesspace/plugins \
   markcooper/archivesspace
 ```
 
-The above example assumes that `$(pwd)/config/config.rb` exists. When `ARCHIVESSPACE_DB_HOST_TYPE=external` and the config volume mount is omitted ArchivesSpace will run with default settings (i.e. `demo` database).
+The above example assumes that `$(pwd)/config/config.rb` exists.
 
 **Local build**
 

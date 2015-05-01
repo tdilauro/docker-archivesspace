@@ -23,7 +23,6 @@ RUN wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql
 # FINALIZE SETUP
 RUN rm -rf /archivesspace/plugins/*
 RUN cp /mysql-connector-java-5.1.34.jar /archivesspace/lib/
-ADD plugins/ /archivesspace/plugins
 ADD setup.sh /setup.sh
 RUN chmod u+x /*.sh
 
