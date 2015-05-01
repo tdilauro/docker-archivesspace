@@ -70,6 +70,24 @@ docker run --name archivesspace -i -t \
   markcooper/archivesspace
 ```
 
+To run with an `external` MySQL instance (i.e. not using `--link` to edit `config.rb`):
+
+```
+# use an external (unlinked) mysql server and mount config, plugins
+docker run --name archivesspace -d \
+  --net=host \
+  -p 8080:8080 \
+  -p 8081:8081 \
+  -p 8089:8089 \
+  -p 8090:8090 \
+  -e ARCHIVESSPACE_DB_HOST_TYPE=external \
+  -v $(pwd)/config:/archivesspace/config \
+  -v $(pwd)/plugins:/archivesspace/plugins \
+  markcooper/archivesspace
+```
+
+The above example assumes that `$(pwd)/config/config.rb` exists. When `ARCHIVESSPACE_DB_HOST_TYPE=external` and the config volume mount is omitted ArchivesSpace will run with default settings (i.e. `demo` database).
+
 **Local build**
 
 ```
