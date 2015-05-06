@@ -1,24 +1,22 @@
 #!/bin/bash
 
-AS_CONF_FILE=/archivesspace/config/config.rb
-AS_DOCKER_DB="AppConfig[:db_url] = 'jdbc:mysql://$DB_PORT_3306_TCP_ADDR:3306/$ARCHIVESSPACE_DB_NAME?user=$ARCHIVESSPACE_DB_USER&password=$ARCHIVESSPACE_DB_PASS&useUnicode=true&characterEncoding=UTF-8'"
+JDBC="jdbc:mysql://"
 
-if [[ "$ARCHIVESSPACE_DB_HOST_TYPE" != "external" ]]; then
-  cat /dev/null > $AS_CONF_FILE
+AS_CONF_FILE="/archivesspace/config/config.rb"
+AS_DOCKER_DB="AppConfig[:db_url] = '${JDBC}$DB_PORT_3306_TCP_ADDR:3306/$ARCHIVESSPACE_DB_NAME?user=$ARCHIVESSPACE_DB_USER&password=$ARCHIVESSPACE_DB_PASS&useUnicode=true&characterEncoding=UTF-8'"
 
-  if [[ "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
+# append db url when mysql is linked if not set (i.e. via mounted `config.rb`)
+if [[ "$ARCHIVESSPACE_DB_HOST_TYPE" == "internal" && "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
+  if ! grep -Fq $JDBC $AS_CONF_FILE; then
     echo $AS_DOCKER_DB >> $AS_CONF_FILE
   fi
+fi
 
-  for PLUGIN in /archivesspace/plugins/*; do
-    [[ -d $PLUGIN ]] && echo "AppConfig[:plugins] << '${PLUGIN##*/}'" >> /archivesspace/config/config.rb
-  done
-else
-  if [[ "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
-    if ! grep -Fq "jdbc:mysql://" $AS_CONF_FILE; then
-      "DB_TYPE is mysql but JDBC url is not present."
-      exit 1
-    fi
+# check in all cases that db url "appears" correct when db type is mysql
+if [[ "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
+  if ! grep -Fq $JDBC $AS_CONF_FILE; then
+    "DB_TYPE is mysql but JDBC url is not present."
+    exit 1
   fi
 fi
 

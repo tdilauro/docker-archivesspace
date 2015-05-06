@@ -18,7 +18,7 @@ docker pull mysql
 docker pull markcooper/archivesspace
 ```
 
-**Running**
+**With Demo database**
 
 ```
 # background mode
@@ -68,13 +68,30 @@ docker run --name archivesspace -i -t \
   -e ARCHIVESSPACE_DB_TYPE=mysql \
   --link mysql:db \
   markcooper/archivesspace
+
+# foreground with mounted configuration
+docker run --name archivesspace -i -t \
+  -p 8080:8080 \
+  -p 8081:8081 \
+  -p 8089:8089 \
+  -p 8090:8090 \
+  -e ARCHIVESSPACE_DB_TYPE=mysql \
+  -v $(pwd)/config:/archivesspace/config \
+  --link mysql:db \
+  markcooper/archivesspace
 ```
 
-To run with an `external` MySQL instance (i.e. not using `--link` to edit `config.rb`):
+The latter example enables the use of a custom configuration file within the linked container. To set the `db_url` correctly in `config.rb` include this line:
+
+```ruby
+AppConfig[:db_url] = "jdbc:mysql://#{ENV['DB_PORT_3306_TCP_ADDR']}:3306/#{ENV['ARCHIVESSPACE_DB_NAME']}?user=#{ENV['ARCHIVESSPACE_DB_USER']}&password=#{ENV['ARCHIVESSPACE_DB_PASS']}&useUnicode=true&characterEncoding=UTF-8"
+```
+
+To run with an `external` MySQL instance (i.e. not using `--link` with `db`):
 
 ```
 # use an external (unlinked) mysql server and mount config, plugins
-docker run --name archivesspace -d \
+docker run --name archivesspace -i -t \
   --net=host \
   -p 8080:8080 \
   -p 8081:8081 \
