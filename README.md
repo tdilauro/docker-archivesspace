@@ -77,6 +77,7 @@ docker run --name archivesspace -i -t \
   -p 8090:8090 \
   -e ARCHIVESSPACE_DB_TYPE=mysql \
   -v $(pwd)/config:/archivesspace/config \
+  -v $(pwd)/plugins:/archivesspace/plugins \
   --link mysql:db \
   markcooper/archivesspace
 ```
