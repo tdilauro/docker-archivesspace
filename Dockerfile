@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM java:8-jre
 MAINTAINER Mark Cooper <mark.c.cooper@outlook.com>
 
 ENV ARCHIVESSPACE_VERSION 1.2.0
@@ -12,7 +12,6 @@ ENV ARCHIVESSPACE_DB_PASS archivesspace
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   mysql-client \
-  openjdk-7-jre-headless \
   wget \
   unzip
 
