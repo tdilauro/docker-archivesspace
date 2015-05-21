@@ -111,6 +111,12 @@ The above example assumes that `$(pwd)/config/config.rb` exists.
 
 ```
 docker build -t archivesspace:latest .
+docker run --name archivesspace -i -t \
+  -p 8080:8080 \
+  -p 8081:8081 \
+  -p 8089:8089 \
+  -p 8090:8090 \
+  archivesspace:latest
 ```
 
 ---
