@@ -3,19 +3,14 @@ Docker ArchivesSpace
 
 Run ArchivesSpace in Docker.
 
-**Quickstart**
-
-```
-./run.sh
-```
-
 **Update images**
 
 To update images from the Docker registry:
 
 ```
 docker pull mysql
-docker pull markcooper/archivesspace
+docker pull markcooper/archivesspace # latest / source
+docker pull markcooper/archivesspace:1.2.0 # version
 ```
 
 **With Demo database**
@@ -45,6 +40,8 @@ docker run --name archivesspace -i -t \
   -p 8090:8090 \
   markcooper/archivesspace /bin/bash
 ```
+
+To run a specific version use `markcooper/archivesspace:1.2.0` (for example).
 
 **With MySQL**
 
@@ -109,14 +106,28 @@ The above example assumes that `$(pwd)/config/config.rb` exists.
 
 **Local build**
 
+From source:
+
 ```
-docker build -t archivesspace:latest .
+docker build -t archivesspace:latest latest/
 docker run --name archivesspace -i -t \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
   archivesspace:latest
+```
+
+From a release:
+
+```
+docker build -t archivesspace:1.2.0 1.2.0/
+docker run --name archivesspace -i -t \
+  -p 8080:8080 \
+  -p 8081:8081 \
+  -p 8089:8089 \
+  -p 8090:8090 \
+  archivesspace:1.2.0
 ```
 
 ---
