@@ -109,7 +109,7 @@ The above example assumes that `$(pwd)/config/config.rb` exists.
 From source:
 
 ```
-docker build -t archivesspace:latest latest/
+docker build --no-cache=true -t archivesspace:latest latest/
 docker run --name archivesspace -i -t \
   -p 8080:8080 \
   -p 8081:8081 \

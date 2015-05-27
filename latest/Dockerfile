@@ -1,17 +1,20 @@
-FROM java:8-jre
+FROM ubuntu:trusty
 MAINTAINER Mark Cooper <mark.c.cooper@outlook.com>
 
-ENV ARCHIVESSPACE_REPOSITORY https://github.com/archivesspace/archivesspace.git
-ENV ARCHIVESSPACE_DB_TYPE demo
-ENV ARCHIVESSPACE_DB_HOST_TYPE internal
-ENV ARCHIVESSPACE_DB_NAME archivesspace
-ENV ARCHIVESSPACE_DB_USER archivesspace
-ENV ARCHIVESSPACE_DB_PASS archivesspace
+ENV ARCHIVESSPACE_REPOSITORY=https://github.com/archivesspace/archivesspace.git \
+  ARCHIVESSPACE_DB_TYPE=demo \
+  ARCHIVESSPACE_DB_HOST_TYPE=internal \
+  ARCHIVESSPACE_DB_NAME=archivesspace \
+  ARCHIVESSPACE_DB_USER=archivesspace \
+  ARCHIVESSPACE_DB_PASS=archivesspace
 
+RUN apt-get -y install --no-install-recommends software-properties-common
+RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   git \
   mysql-client \
+  openjdk-8-jre \
   wget \
   unzip
 
