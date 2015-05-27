@@ -14,9 +14,10 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   git \
   mysql-client \
-  openjdk-8-jre \
+  openjdk-8-jre-headless \
   wget \
-  unzip
+  unzip && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar
 

@@ -15,9 +15,10 @@ RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   mysql-client \
-  openjdk-8-jre \
+  openjdk-8-jre-headless \
   wget \
-  unzip
+  unzip && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN wget $ARCHIVESSPACE_URL
 RUN unzip archivesspace-v$ARCHIVESSPACE_VERSION.zip
