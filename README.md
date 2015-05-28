@@ -9,8 +9,8 @@ To update images from the Docker registry:
 
 ```
 docker pull mysql
-docker pull markcooper/archivesspace # latest / source
-docker pull markcooper/archivesspace:1.2.0 # version
+docker pull lyrasis/archivesspace # latest / source
+docker pull lyrasis/archivesspace:1.2.0 # version
 ```
 
 **With Demo database**
@@ -22,7 +22,7 @@ docker run --name archivesspace -d \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
-  markcooper/archivesspace
+  lyrasis/archivesspace
 
 # foreground mode
 docker run --name archivesspace -i -t \
@@ -30,7 +30,7 @@ docker run --name archivesspace -i -t \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
-  markcooper/archivesspace
+  lyrasis/archivesspace
 
 # foreground mode and access container
 docker run --name archivesspace -i -t \
@@ -38,10 +38,10 @@ docker run --name archivesspace -i -t \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
-  markcooper/archivesspace /bin/bash
+  lyrasis/archivesspace /bin/bash
 ```
 
-To run a specific version use `markcooper/archivesspace:1.2.0` (for example).
+To run a specific version use `lyrasis/archivesspace:1.2.0` (for example).
 
 **With MySQL**
 
@@ -64,7 +64,7 @@ docker run --name archivesspace -i -t \
   -p 8090:8090 \
   -e ARCHIVESSPACE_DB_TYPE=mysql \
   --link mysql:db \
-  markcooper/archivesspace
+  lyrasis/archivesspace
 
 # foreground with mounted configuration
 docker run --name archivesspace -i -t \
@@ -76,7 +76,7 @@ docker run --name archivesspace -i -t \
   -v $(pwd)/config:/archivesspace/config \
   -v $(pwd)/plugins:/archivesspace/plugins \
   --link mysql:db \
-  markcooper/archivesspace
+  lyrasis/archivesspace
 ```
 
 The latter example enables the use of a custom configuration file within the linked container. To set the `db_url` correctly in `config.rb` include this line:
@@ -99,7 +99,7 @@ docker run --name archivesspace -i -t \
   -e ARCHIVESSPACE_DB_HOST_TYPE=external \
   -v $(pwd)/config:/archivesspace/config \
   -v $(pwd)/plugins:/archivesspace/plugins \
-  markcooper/archivesspace
+  lyrasis/archivesspace
 ```
 
 The above example assumes that `$(pwd)/config/config.rb` exists.
