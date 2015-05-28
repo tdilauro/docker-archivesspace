@@ -14,7 +14,7 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   git \
   mysql-client \
-  openjdk-8-jre-headless \
+  openjdk-8-jre \
   wget \
   unzip && \
   rm -rf /var/lib/apt/lists/*
