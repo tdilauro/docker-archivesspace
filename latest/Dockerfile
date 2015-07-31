@@ -8,13 +8,22 @@ ENV ARCHIVESSPACE_REPOSITORY=https://github.com/archivesspace/archivesspace.git 
   ARCHIVESSPACE_DB_USER=archivesspace \
   ARCHIVESSPACE_DB_PASS=archivesspace
 
+# ADD MULTIVERSE FOR JASPER MS FONTS
+RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse\n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ trusty multiverse\n\
+deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse\n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse\n'\
+>> /etc/apt/sources.list
+
 RUN apt-get -y install --no-install-recommends software-properties-common
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
+RUN echo msttcorefonts msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   git \
+  msttcorefonts \
   mysql-client \
-  openjdk-8-jre \
+  openjdk-8-jdk \
   wget \
   unzip && \
   rm -rf /var/lib/apt/lists/*
