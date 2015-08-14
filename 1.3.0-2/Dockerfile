@@ -1,6 +1,14 @@
 FROM ubuntu:trusty
 MAINTAINER Mark Cooper <mark.c.cooper@outlook.com>
 
+COPY locale /etc/default/locale
+RUN locale-gen en_US.UTF-8 && \
+  DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+
+ENV LANG=en_US.UTF-8 \
+  LANGUAGE=en_US:en \
+  LC_ALL=en_US.UTF-8
+
 # 1.3.0-2 USES 1.3.0-1 RELEASE WITH UPDATES FOR JASPER REPORTS
 ENV ARCHIVESSPACE_VERSION=1.3.0-1
 
