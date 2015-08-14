@@ -130,4 +130,26 @@ docker run --name archivesspace -i -t \
   archivesspace:1.2.0
 ```
 
+**Development**
+
+```
+docker build -t aspace dev/
+```
+
+Change to the ArchivesSpace source directory:
+
+```
+build/run bootstrap # as necessary
+
+# foreground
+docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace aspace
+
+# background
+docker run -d --name aspace --net=host -v /$(pwd):/archivesspace aspace
+docker logs -f aspace # access the logs
+
+# data
+docker run -d --name aspace --net=host -v /$(pwd):/archivesspace -e ASPACE_DEMO=true aspace
+```
+
 ---
