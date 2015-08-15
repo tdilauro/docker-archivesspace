@@ -148,8 +148,29 @@ docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace aspace
 docker run -d --name aspace --net=host -v /$(pwd):/archivesspace aspace
 docker logs -f aspace # access the logs
 
-# data
+# with demo data
 docker run -d --name aspace --net=host -v /$(pwd):/archivesspace -e ASPACE_DEMO=true aspace
+```
+
+Running the tests:
+
+```
+# default "selenium:staff"
+docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+  aspace /run.sh
+
+# public ui tests
+docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+  aspace /run.sh selenium:public
+
+# specifying a test group
+docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+  aspace /run.sh selenium:test -Dexample='Record Lifecycle'
+
+# specifying a test group and nuking the db, solr index and tmp files
+docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+  -e ASPACE_NUKE=true \
+  aspace /run.sh selenium:test -Dexample='Record Lifecycle'
 ```
 
 ---
