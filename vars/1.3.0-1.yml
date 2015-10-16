@@ -1,0 +1,5 @@
+---
+
+archivesspace_version: 1.3.0-1
+archivesspace_url: "http://13ac7.http.dal05.cdn.softlayer.net/aspace/archivesspace-v{{ archivesspace_version }}.zip"
+mysql_connector_version: 5.1.34

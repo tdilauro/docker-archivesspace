@@ -1,0 +1,34 @@
+---
+
+# ansible-playbook -i 'localhost,' build.yml --extra-vars="config_file=vars/1.4.1.yml output_directory=1.4.1"
+
+- name: build archivesspace dockerfiles
+  hosts: localhost
+  connection: local
+  sudo: no
+
+  vars:
+    # set default config
+    config_file: vars/latest.yml
+    # set default output directory
+    output_directory: latest
+
+  tasks:
+    - name: include the config file
+      include_vars: "{{ config_file }}"
+
+    - name: create the config output directory
+      file:
+        path: "{{ output_directory }}"
+        state: directory
+
+    - name: copy the support scripts
+      copy:
+        src: "{{ item }}"
+        dest: "{{ output_directory }}/{{ item | basename }}"
+      with_fileglob: scripts/*
+
+    - name: create the tenant Dockerfile
+      template:
+        src: templates/Dockerfile.j2
+        dest: "{{ output_directory }}/Dockerfile"

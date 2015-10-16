@@ -9,10 +9,9 @@ ENV LANG=en_US.UTF-8 \
   LANGUAGE=en_US:en \
   LC_ALL=en_US.UTF-8
 
-# 1.3.0-2 USES 1.3.0-1 RELEASE WITH UPDATES FOR JASPER REPORTS
-ENV ARCHIVESSPACE_VERSION=1.3.0-1
+ENV ARCHIVESSPACE_VERSION={{ archivesspace_version }}
 
-ENV ARCHIVESSPACE_URL=http://13ac7.http.dal05.cdn.softlayer.net/aspace/archivesspace-v$ARCHIVESSPACE_VERSION.zip \
+ENV ARCHIVESSPACE_URL={{ archivesspace_url }} \
   ARCHIVESSPACE_DB_TYPE=demo \
   ARCHIVESSPACE_DB_HOST_TYPE=internal \
   ARCHIVESSPACE_DB_NAME=archivesspace \
@@ -40,11 +39,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
 
 RUN wget $ARCHIVESSPACE_URL
 RUN unzip archivesspace-v$ARCHIVESSPACE_VERSION.zip
-RUN wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar
+RUN wget http://central.maven.org/maven2/mysql/mysql-connector-java/{{ mysql_connector_version }}/mysql-connector-java-{{ mysql_connector_version }}.jar
 
 # FINALIZE SETUP
 RUN rm -rf /archivesspace/plugins/*
-RUN cp /mysql-connector-java-5.1.34.jar /archivesspace/lib/
+RUN cp /mysql-connector-java-{{ mysql_connector_version }}.jar /archivesspace/lib/
 ADD setup.sh /setup.sh
 RUN chmod u+x /*.sh
 

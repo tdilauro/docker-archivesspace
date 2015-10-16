@@ -1,21 +1,38 @@
 FROM ubuntu:trusty
 MAINTAINER Mark Cooper <mark.c.cooper@outlook.com>
 
+COPY locale /etc/default/locale
+RUN locale-gen en_US.UTF-8 && \
+  DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+
+ENV LANG=en_US.UTF-8 \
+  LANGUAGE=en_US:en \
+  LC_ALL=en_US.UTF-8
+
 ENV ARCHIVESSPACE_VERSION=1.3.0-1
 
-ENV ARCHIVESSPACE_URL=http://13ac7.http.dal05.cdn.softlayer.net/aspace/archivesspace-v$ARCHIVESSPACE_VERSION.zip \
+ENV ARCHIVESSPACE_URL=http://13ac7.http.dal05.cdn.softlayer.net/aspace/archivesspace-v1.3.0-1.zip \
   ARCHIVESSPACE_DB_TYPE=demo \
   ARCHIVESSPACE_DB_HOST_TYPE=internal \
   ARCHIVESSPACE_DB_NAME=archivesspace \
   ARCHIVESSPACE_DB_USER=archivesspace \
   ARCHIVESSPACE_DB_PASS=archivesspace
 
+# ADD MULTIVERSE FOR JASPER MS FONTS
+RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse\n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ trusty multiverse\n\
+deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse\n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse\n'\
+>> /etc/apt/sources.list
+
 RUN apt-get -y install --no-install-recommends software-properties-common
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
+RUN echo msttcorefonts msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   mysql-client \
-  openjdk-8-jre-headless \
+  msttcorefonts \
+  openjdk-8-jdk \
   wget \
   unzip && \
   rm -rf /var/lib/apt/lists/*

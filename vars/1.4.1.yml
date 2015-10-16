@@ -1,0 +1,5 @@
+---
+
+archivesspace_version: 1.4.1
+archivesspace_url: "https://github.com/archivesspace/archivesspace/releases/download/v{{ archivesspace_version }}/archivesspace-v{{ archivesspace_version }}.zip"
+mysql_connector_version: 5.1.34

@@ -11,7 +11,7 @@ ENV LANG=en_US.UTF-8 \
 
 ENV ARCHIVESSPACE_VERSION=1.4.0
 
-ENV ARCHIVESSPACE_URL=https://github.com/archivesspace/archivesspace/releases/download/v$ARCHIVESSPACE_VERSION/archivesspace-v$ARCHIVESSPACE_VERSION.zip \
+ENV ARCHIVESSPACE_URL=https://github.com/archivesspace/archivesspace/releases/download/v1.4.0/archivesspace-v1.4.0.zip \
   ARCHIVESSPACE_DB_TYPE=demo \
   ARCHIVESSPACE_DB_HOST_TYPE=internal \
   ARCHIVESSPACE_DB_NAME=archivesspace \

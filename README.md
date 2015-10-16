@@ -10,7 +10,7 @@ To update images from the Docker registry:
 ```
 docker pull mysql
 docker pull lyrasis/archivesspace # latest / source
-docker pull lyrasis/archivesspace:1.2.0 # version
+docker pull lyrasis/archivesspace:1.4.1 # version
 ```
 
 **With Demo database**
