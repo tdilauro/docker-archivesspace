@@ -15,7 +15,7 @@ fi
 # check in all cases that db url "appears" correct when db type is mysql
 if [[ "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
   if ! grep -Fq $JDBC $AS_CONF_FILE; then
-    "DB_TYPE is mysql but JDBC url is not present."
+    echo "DB_TYPE is mysql but JDBC url is not present."
     exit 1
   fi
 fi
