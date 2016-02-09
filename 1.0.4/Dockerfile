@@ -46,6 +46,7 @@ RUN rm -rf /archivesspace/plugins/*
 RUN cp /mysql-connector-java-5.1.24.jar /archivesspace/lib/
 ADD setup.sh /setup.sh
 RUN chmod u+x /*.sh
+ADD launcher_rc.rb /archivesspace/launcher_rc.rb
 
 EXPOSE 8080 8081 8089 8090
 
