@@ -25,7 +25,7 @@ docker run --name archivesspace -d \
   lyrasis/archivesspace
 
 # foreground mode
-docker run --name archivesspace -i -t \
+docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -33,7 +33,7 @@ docker run --name archivesspace -i -t \
   lyrasis/archivesspace
 
 # foreground mode and access container
-docker run --name archivesspace -i -t \
+docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -41,7 +41,7 @@ docker run --name archivesspace -i -t \
   lyrasis/archivesspace /bin/bash
 ```
 
-To run a specific version use `lyrasis/archivesspace:1.2.0` (for example).
+To run a specific version use `lyrasis/archivesspace:1.4.2` (for example).
 
 **With MySQL**
 
@@ -57,7 +57,7 @@ docker run -d \
   mysql
 
 # foreground mode
-docker run --name archivesspace -i -t \
+docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -67,7 +67,7 @@ docker run --name archivesspace -i -t \
   lyrasis/archivesspace
 
 # foreground with mounted configuration
-docker run --name archivesspace -i -t \
+docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -89,7 +89,7 @@ To run with an `external` MySQL instance (i.e. not using `--link` with `db`):
 
 ```
 # use an external (unlinked) mysql server and mount config, plugins
-docker run --name archivesspace -i -t \
+docker run --name archivesspace -it \
   --net=host \
   -p 8080:8080 \
   -p 8081:8081 \
@@ -110,7 +110,7 @@ From source:
 
 ```
 docker build --no-cache=true -t archivesspace:latest latest/
-docker run --name archivesspace -i -t \
+docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
@@ -121,13 +121,13 @@ docker run --name archivesspace -i -t \
 From a release:
 
 ```
-docker build -t archivesspace:1.2.0 1.2.0/
-docker run --name archivesspace -i -t \
+docker build -t archivesspace:1.4.2 1.4.2/
+docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
-  archivesspace:1.2.0
+  archivesspace:1.4.2
 ```
 
 **Development**
@@ -142,7 +142,7 @@ Change to the ArchivesSpace source directory:
 build/run bootstrap # as necessary
 
 # foreground
-docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace aspace
+docker run -it --name aspace --net=host -v /$(pwd):/archivesspace aspace
 
 # background
 docker run -d --name aspace --net=host -v /$(pwd):/archivesspace aspace
@@ -156,19 +156,19 @@ Running the tests:
 
 ```
 # default "selenium:staff"
-docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
   aspace /run.sh
 
 # public ui tests
-docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
   aspace /run.sh selenium:public
 
 # specifying a test group
-docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
   aspace /run.sh selenium:test -Dexample='Record Lifecycle'
 
 # specifying a test group and nuking the db, solr index and tmp files
-docker run -i -t --name aspace --net=host -v /$(pwd):/archivesspace \
+docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
   -e ASPACE_NUKE=true \
   aspace /run.sh selenium:test -Dexample='Record Lifecycle'
 ```
