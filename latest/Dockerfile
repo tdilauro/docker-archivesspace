@@ -2,7 +2,7 @@ FROM lyrasis/archivesspace:base
 MAINTAINER Mark Cooper <mark.c.cooper@outlook.com>
 
 ENV ARCHIVESSPACE_REPOSITORY=https://github.com/archivesspace/archivesspace.git \
-  ASPACE_PUBLIC_DEV=false \
+  ASPACE_PUBLIC_DEV=true \
   ARCHIVESSPACE_DB_TYPE=demo \
   ARCHIVESSPACE_DB_HOST_TYPE=internal \
   ARCHIVESSPACE_DB_NAME=archivesspace \
