@@ -10,6 +10,7 @@ ENV LANG=en_US.UTF-8 \
   LC_ALL=en_US.UTF-8
 
 ENV ARCHIVESSPACE_REPOSITORY=https://github.com/archivesspace/archivesspace.git \
+  ASPACE_PUBLIC_DEV=false \
   ARCHIVESSPACE_DB_TYPE=demo \
   ARCHIVESSPACE_DB_HOST_TYPE=internal \
   ARCHIVESSPACE_DB_NAME=archivesspace \
