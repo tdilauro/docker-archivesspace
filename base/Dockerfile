@@ -16,6 +16,9 @@ deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse\n\
 deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse\n'\
 >> /etc/apt/sources.list
 
+# ACCEPT THE LICENSE
+RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+
 RUN apt-get -y install --no-install-recommends software-properties-common
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
