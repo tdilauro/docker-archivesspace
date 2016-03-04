@@ -24,6 +24,7 @@ RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
 RUN echo msttcorefonts msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+  git \
   mysql-client \
   msttcorefonts \
   openjdk-8-jdk \
