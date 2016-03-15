@@ -20,8 +20,8 @@ install:
   # confirm we can build the base image
   - docker build -t archivesspace/base base/
   # app builds will use lyrasis/collectionspace:base
-  - travis_wait 45 docker build -t archivesspace/latest latest/
-  - docker run --name aspace -d -p 8089:8089 -e ARCHIVESSPACE_DB_TYPE=mysql --link mysql:db archivesspace/latest
+  - docker build -t archivesspace/release release/
+  - docker run --name aspace -d -p 8089:8089 -e ARCHIVESSPACE_DB_TYPE=mysql --link mysql:db archivesspace/release
 
 before_script:
   - sleep 60
