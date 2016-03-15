@@ -1,6 +1,9 @@
 Docker ArchivesSpace
 ====================
 
+[![](https://badge.imagelayers.io/lyrasis/archivesspace:latest.svg)](https://imagelayers.io/?images=lyrasis/archivesspace:latest 'Get your own badge on imagelayers.io')
+[![Build Status](https://travis-ci.org/lyrasis/docker-archivesspace.svg?branch=master)](https://travis-ci.org/lyrasis/docker-archivesspace)
+
 Run ArchivesSpace in Docker.
 
 **Update images**
