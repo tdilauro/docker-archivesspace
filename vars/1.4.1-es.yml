@@ -1,6 +1,0 @@
----
-
-archivesspace_version: 1.4.1
-# includes :es locale updates
-archivesspace_url: "http://13ac7.http.dal05.cdn.softlayer.net/aspace/archivesspace-v{{ archivesspace_version }}.zip"
-mysql_connector_version: 5.1.34
