@@ -136,7 +136,7 @@ docker run --name archivesspace -it \
 **Development**
 
 ```
-docker build -t aspace dev/
+docker build -t aspace-dev dev/
 ```
 
 Change to the ArchivesSpace source directory:
@@ -145,35 +145,38 @@ Change to the ArchivesSpace source directory:
 build/run bootstrap # as necessary
 
 # foreground
-docker run -it --name aspace --net=host -v /$(pwd):/archivesspace aspace
+docker run -it --name aspace-dev --net=host -v /$(pwd):/archivesspace aspace-dev
 
 # background
-docker run -d --name aspace --net=host -v /$(pwd):/archivesspace aspace
-docker logs -f aspace # access the logs
+docker run -d --name aspace-dev --net=host -v /$(pwd):/archivesspace aspace-dev
+docker logs -f aspace-dev # access the logs
 
 # with demo data
-docker run -d --name aspace --net=host -v /$(pwd):/archivesspace -e ASPACE_DEMO=true aspace
+docker run -d --name aspace-dev --net=host -v /$(pwd):/archivesspace -e ASPACE_DEMO=true aspace-dev
+
+# with new public ui
+docker run -d --name aspace-dev --net=host -v /$(pwd):/archivesspace -e ASPACE_PUBLIC_DEV=true aspace-dev
 ```
 
 Running the tests:
 
 ```
 # default "selenium:staff"
-docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
-  aspace /run.sh
+docker run -it --name aspace-dev --net=host -v /$(pwd):/archivesspace \
+  aspace-dev /run.sh
 
 # public ui tests
-docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
-  aspace /run.sh selenium:public
+docker run -it --name aspace-dev --net=host -v /$(pwd):/archivesspace \
+  aspace-dev /run.sh selenium:public
 
 # specifying a test group
-docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
-  aspace /run.sh selenium:test -Dexample='Record Lifecycle'
+docker run -it --name aspace-dev --net=host -v /$(pwd):/archivesspace \
+  aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
 
 # specifying a test group and nuking the db, solr index and tmp files
-docker run -it --name aspace --net=host -v /$(pwd):/archivesspace \
+docker run -it --name aspace-dev --net=host -v /$(pwd):/archivesspace \
   -e ASPACE_NUKE=true \
-  aspace /run.sh selenium:test -Dexample='Record Lifecycle'
+  aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
 ```
 
 ---
