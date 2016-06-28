@@ -10,5 +10,6 @@ ADD supervisord-aspace.conf /etc/supervisor/conf.d/supervisord-aspace.conf
 
 ENV ASPACE_NUKE false
 ENV ASPACE_DEMO false
+ENV ASPACE_PUBLIC_DEV false
 
 CMD ["/usr/bin/supervisord", "-n"]

@@ -142,8 +142,13 @@ docker build -t aspace-dev dev/
 Change to the ArchivesSpace source directory:
 
 ```
-build/run bootstrap # as necessary
+build/run bootstrap # locally, as necessary
+# repeat with: export ASPACE_PUBLIC_DEV=true for public-new testing
+```
 
+Running a container:
+
+```
 # foreground
 docker run -it --name aspace-dev \
   --net=host \
@@ -155,8 +160,6 @@ docker run -d --name aspace-dev \
   --net=host \
   -v /$(pwd):/archivesspace \
   aspace-dev
-
-docker logs -f aspace-dev # access the logs
 
 # with demo data
 docker run -d --name aspace-dev \
@@ -173,29 +176,35 @@ docker run -d --name aspace-dev \
   aspace-dev
 ```
 
+Logs (when container in background):
+
+```
+docker logs -f aspace-dev
+```
+
 Running the tests:
 
 ```
 # default "selenium:staff"
-docker run -it --name aspace-dev \
+docker run -it --rm --name aspace-dev \
   --net=host \
   -v /$(pwd):/archivesspace \
   aspace-dev /run.sh
 
 # public ui tests
-docker run -it --name aspace-dev \
+docker run -it --rm --name aspace-dev \
   --net=host \
   -v /$(pwd):/archivesspace \
   aspace-dev /run.sh selenium:public
 
 # specifying a test group
-docker run -it --name aspace-dev \
+docker run -it --rm --name aspace-dev \
   --net=host \
   -v /$(pwd):/archivesspace \
   aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
 
 # specifying a test group and nuking the db, solr index and tmp files
-docker run -it --name aspace-dev \
+docker run -it --rm --name aspace-dev \
   --net=host \
   -v /$(pwd):/archivesspace \
   -e ASPACE_NUKE=true \
