@@ -142,7 +142,7 @@ docker build -t aspace-dev dev/
 Change to the ArchivesSpace source directory:
 
 ```
-build/run bootstrap # locally, as necessary
+./build/run bootstrap # locally, as necessary
 # repeat with: export ASPACE_PUBLIC_DEV=true for public-new testing
 ```
 
@@ -209,6 +209,31 @@ docker run -it --rm --name aspace-dev \
   -v /$(pwd):/archivesspace \
   -e ASPACE_NUKE=true \
   aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
+```
+
+All-in-one new public ui dev starter command (will take ~10 minutes to setup):
+
+```
+# skip these lines if already bootstrapped
+export ASPACE_PUBLIC_DEV=true
+./build/run bootstrap
+./build/run db:nuke
+
+docker run -d --name aspace-dev \
+  --net=host \
+  -v /$(pwd):/archivesspace \
+  -e ASPACE_DEMO=true \
+  -e ASPACE_PUBLIC_DEV=true \
+  aspace-dev
+
+docker logs -f aspace-dev
+```
+
+Kick it:
+
+```
+docker stop aspace-dev && docker rm aspace-dev
+# now re-run the run command
 ```
 
 ---

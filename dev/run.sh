@@ -12,7 +12,7 @@ TASK_OPTS=${3:-"-Dcores=4 -Dgroups=1"}
   --background \
   --exec /usr/bin/Xvfb -- :99 -ac -screen 0 2560x1700x24
 
-if $ASPACE_NUKE; then
+if [ "$ASPACE_NUKE" == true ]; then
   # start with a clean database, index and delete tmp files
   /archivesspace/build/run frontend:clean
   /archivesspace/build/run public:clean
