@@ -133,35 +133,4 @@ docker run --name archivesspace -it \
   archivesspace:1.4.2
 ```
 
-**Development**
-
-```
-docker build -t aspace-dev dev/
-```
-
-Change to the ArchivesSpace source directory:
-
-```
-./build/run bootstrap # locally, as necessary
-```
-
-Running the tests:
-
-```
-# default "selenium:staff"
-docker run -it --rm -v /$(pwd):/archivesspace aspace-dev
-
-# public ui tests
-docker run -it --rm -v /$(pwd):/archivesspace aspace-dev /run.sh selenium:public
-
-# specifying a test group
-docker run -it --rm -v /$(pwd):/archivesspace aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
-```
-
-Reset permissions:
-
-```
-[sudo] chown -R $user:$user *
-```
-
 ---
