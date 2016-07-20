@@ -143,97 +143,25 @@ Change to the ArchivesSpace source directory:
 
 ```
 ./build/run bootstrap # locally, as necessary
-# repeat with: export ASPACE_PUBLIC_DEV=true for public-new testing
-```
-
-Running a container:
-
-```
-# foreground
-docker run -it --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  aspace-dev
-
-# background
-docker run -d --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  aspace-dev
-
-# with demo data
-docker run -d --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  -e ASPACE_DEMO=true \
-  aspace-dev
-
-# with new public ui
-docker run -d --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  -e ASPACE_PUBLIC_DEV=true \
-  aspace-dev
-```
-
-Logs (when container in background):
-
-```
-docker logs -f aspace-dev
 ```
 
 Running the tests:
 
 ```
 # default "selenium:staff"
-docker run -it --rm --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  aspace-dev /run.sh
+docker run -it --rm -v /$(pwd):/archivesspace aspace-dev
 
 # public ui tests
-docker run -it --rm --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  aspace-dev /run.sh selenium:public
+docker run -it --rm -v /$(pwd):/archivesspace aspace-dev /run.sh selenium:public
 
 # specifying a test group
-docker run -it --rm --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
-
-# specifying a test group and nuking the db, solr index and tmp files
-docker run -it --rm --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  -e ASPACE_NUKE=true \
-  aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
+docker run -it --rm -v /$(pwd):/archivesspace aspace-dev /run.sh selenium:test -Dexample='Record Lifecycle'
 ```
 
-All-in-one new public ui dev starter command (will take ~10 minutes to setup):
+Reset permissions:
 
 ```
-# skip these lines if already bootstrapped
-export ASPACE_PUBLIC_DEV=true
-./build/run bootstrap
-./build/run db:nuke
-
-docker run -d --name aspace-dev \
-  --net=host \
-  -v /$(pwd):/archivesspace \
-  -e ASPACE_DEMO=true \
-  -e ASPACE_PUBLIC_DEV=true \
-  aspace-dev
-
-docker logs -f aspace-dev
-```
-
-Kick it:
-
-```
-docker stop aspace-dev && docker rm aspace-dev
-# now re-run the run command
+[sudo] chown -R $user:$user *
 ```
 
 ---

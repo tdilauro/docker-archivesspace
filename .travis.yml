@@ -19,7 +19,7 @@ install:
   - docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=archivesspace -e MYSQL_USER=archivesspace -e MYSQL_PASSWORD=archivesspace mysql:5.5
   # confirm we can build the base image
   - docker build -t archivesspace/base base/
-  # app builds will use lyrasis/collectionspace:base
+  # app builds will use lyrasis/archivesspace:base
   - docker build -t archivesspace/release release/
   - docker run --name aspace -d -p 8089:8089 -e ARCHIVESSPACE_DB_TYPE=mysql --link mysql:db archivesspace/release
 
@@ -29,4 +29,3 @@ before_script:
 script:
   - docker ps | grep aspace
   - curl -Fpassword=admin http://localhost:8089/users/admin/login
-
