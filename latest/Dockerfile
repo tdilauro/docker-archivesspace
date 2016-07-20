@@ -9,7 +9,7 @@ ENV ARCHIVESSPACE_REPOSITORY=https://github.com/archivesspace/archivesspace.git 
   ARCHIVESSPACE_DB_USER=archivesspace \
   ARCHIVESSPACE_DB_PASS=archivesspace
 
-RUN wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar
+RUN wget http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar
 
 RUN mkdir -p /source
 RUN git clone $ARCHIVESSPACE_REPOSITORY /source/archivesspace
@@ -28,7 +28,7 @@ RUN rm -rf /archivesspace/plugins/*
 RUN chmod 755 /archivesspace/archivesspace.sh
 
 # FINALIZE SETUP
-RUN cp /mysql-connector-java-5.1.34.jar /archivesspace/lib/
+RUN cp /mysql-connector-java-5.1.39.jar /archivesspace/lib/
 ADD setup.sh /setup.sh
 RUN chmod u+x /*.sh
 
