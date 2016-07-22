@@ -57,7 +57,7 @@ docker run -d \
   -e MYSQL_DATABASE=archivesspace \
   -e MYSQL_USER=archivesspace \
   -e MYSQL_PASSWORD=archivesspace \
-  mysql
+  mysql:5.5 --innodb_buffer_pool_size=4G
 
 # foreground mode
 docker run --name archivesspace -it \
