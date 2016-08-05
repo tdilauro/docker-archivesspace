@@ -13,7 +13,7 @@ To update images from the Docker registry:
 ```
 docker pull mysql
 docker pull lyrasis/archivesspace # latest / source
-docker pull lyrasis/archivesspace:1.5.0 # version
+docker pull lyrasis/archivesspace:1.5.1 # version
 ```
 
 **With Demo database**
@@ -44,12 +44,12 @@ docker run --name archivesspace -it \
   lyrasis/archivesspace /bin/bash
 ```
 
-To run a specific version use `lyrasis/archivesspace:1.5.0` (for example).
+To run a specific version use `lyrasis/archivesspace:1.5.1` (for example).
 
 **With MySQL**
 
 ```
-# pull and run the official mysql docker image
+# pull and run the official mysql docker image (tweak the config according to preference)
 docker run -d \
   -p 3306:3306 \
   --name mysql \
@@ -57,7 +57,7 @@ docker run -d \
   -e MYSQL_DATABASE=archivesspace \
   -e MYSQL_USER=archivesspace \
   -e MYSQL_PASSWORD=archivesspace \
-  mysql:5.5 --innodb_buffer_pool_size=4G
+  mysql:5.6 --innodb_buffer_pool_size=4G --innodb_buffer_pool_instances=4
 
 # foreground mode
 docker run --name archivesspace -it \
@@ -94,10 +94,6 @@ To run with an `external` MySQL instance (i.e. not using `--link` with `db`):
 # use an external (unlinked) mysql server and mount config, plugins
 docker run --name archivesspace -it \
   --net=host \
-  -p 8080:8080 \
-  -p 8081:8081 \
-  -p 8089:8089 \
-  -p 8090:8090 \
   -e ARCHIVESSPACE_DB_TYPE=mysql \
   -e ARCHIVESSPACE_DB_HOST_TYPE=external \
   -v $(pwd)/config:/archivesspace/config \
@@ -124,13 +120,13 @@ docker run --name archivesspace -it \
 From a release:
 
 ```
-docker build -t archivesspace:1.5.0 1.5.0/
+docker build -t archivesspace:1.5.1 1.5.1/
 docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
-  archivesspace:1.5.0
+  archivesspace:1.5.1
 ```
 
 ## License
