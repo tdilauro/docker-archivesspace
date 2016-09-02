@@ -29,6 +29,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   mysql-client \
   msttcorefonts \
   openjdk-8-jdk \
+  openjdk-8-jre-headless \
   wget \
   unzip && \
   rm -rf /var/lib/apt/lists/*
