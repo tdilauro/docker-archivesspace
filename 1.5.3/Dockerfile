@@ -1,7 +1,7 @@
 FROM lyrasis/archivesspace:base
 MAINTAINER Mark Cooper <mark.c.cooper@outlook.com>
 
-ENV ARCHIVESSPACE_VERSION=1.5.2
+ENV ARCHIVESSPACE_VERSION=1.5.3
 
 ENV ARCHIVESSPACE_URL=https://github.com/archivesspace/archivesspace/releases/download/v${ARCHIVESSPACE_VERSION}/archivesspace-v${ARCHIVESSPACE_VERSION}.zip \
   ARCHIVESSPACE_DB_TYPE=demo \
