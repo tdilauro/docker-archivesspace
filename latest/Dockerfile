@@ -3,6 +3,7 @@ MAINTAINER Mark Cooper <mark.c.cooper@outlook.com>
 
 ENV ARCHIVESSPACE_REPOSITORY=https://github.com/archivesspace/archivesspace.git \
   ASPACE_PUBLIC_DEV=true \
+  ASPACE_PUBLIC_NEW=true \
   ARCHIVESSPACE_DB_TYPE=demo \
   ARCHIVESSPACE_DB_HOST_TYPE=internal \
   ARCHIVESSPACE_DB_NAME=archivesspace \
