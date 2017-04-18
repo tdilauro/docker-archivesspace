@@ -13,7 +13,7 @@ To update images from the Docker registry:
 ```
 docker pull mysql
 docker pull lyrasis/archivesspace # latest / source
-docker pull lyrasis/archivesspace:1.5.1 # version
+docker pull lyrasis/archivesspace:2.0.0 # version
 ```
 
 **With Demo database**
@@ -44,7 +44,7 @@ docker run --name archivesspace -it \
   lyrasis/archivesspace /bin/bash
 ```
 
-To run a specific version use `lyrasis/archivesspace:1.5.1` (for example).
+To run a specific version use `lyrasis/archivesspace:2.0.0` (for example).
 
 **With MySQL**
 
@@ -120,13 +120,13 @@ docker run --name archivesspace -it \
 From a release:
 
 ```
-docker build -t archivesspace:1.5.1 1.5.1/
+docker build -t archivesspace:2.0.0 2.0.0/
 docker run --name archivesspace -it \
   -p 8080:8080 \
   -p 8081:8081 \
   -p 8089:8089 \
   -p 8090:8090 \
-  archivesspace:1.5.1
+  archivesspace:2.0.0
 ```
 
 ## License
