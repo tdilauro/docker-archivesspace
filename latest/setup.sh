@@ -8,6 +8,7 @@ AS_DOCKER_DB="AppConfig[:db_url] = '${JDBC}$DB_PORT_3306_TCP_ADDR:3306/$ARCHIVES
 # append db url when mysql is linked if not set (i.e. via mounted `config.rb`)
 if [[ "$ARCHIVESSPACE_DB_HOST_TYPE" == "internal" && "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
   if ! grep -Fq $JDBC $AS_CONF_FILE; then
+    echo "Inserting MySQL db connection string into config."
     echo $AS_DOCKER_DB >> $AS_CONF_FILE
   fi
 fi
@@ -15,9 +16,10 @@ fi
 # check in all cases that db url "appears" correct when db type is mysql
 if [[ "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
   if ! grep -Fq $JDBC $AS_CONF_FILE; then
-    "DB_TYPE is mysql but JDBC url is not present."
+    echo "DB_TYPE is mysql but connection string is not present."
     exit 1
   fi
+  echo "Using MySQL db connection."
 fi
 
 /archivesspace/scripts/setup-database.sh
