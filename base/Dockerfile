@@ -10,6 +10,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   mysql-client \
   openjdk-8-jdk \
   openjdk-8-jre-headless \
+  sendmail \
   wget \
   unzip && \
   rm -rf /var/lib/apt/lists/*

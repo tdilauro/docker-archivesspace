@@ -22,5 +22,11 @@ if [[ "$ARCHIVESSPACE_DB_TYPE" == "mysql" ]]; then
   echo "Using MySQL db connection."
 fi
 
+# http://www.tothenew.com/blog/setting-up-sendmail-inside-your-docker-container/
+line=$(head -n 1 /etc/hosts)
+line2=$(echo $line | awk '{print $2}')
+echo "$line $line2.localdomain" >> /etc/hosts
+service sendmail start
+
 /archivesspace/scripts/setup-database.sh
 exec /archivesspace/archivesspace.sh
